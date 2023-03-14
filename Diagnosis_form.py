@@ -9,7 +9,7 @@ def Diagnosis():
     window = Tk()
     window.title("Covid-19 Diagnosis System")
     window.geometry("1000x800")
-    window.resizable(False, False)
+    window.resizable(True, True)
 
     namelabel = Label(window, text="Full Name: ")
     agelabel = Label(window, text="Age: ")
