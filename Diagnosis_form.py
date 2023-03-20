@@ -1,63 +1,71 @@
 from tkinter import *
+import customtkinter
 from pyswip import Prolog
 
 
 # Patient Diagnositics Form
 
+# customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
+# customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 def Diagnosis():
-    window = Tk()
+    window = customtkinter.CTk()
     window.title("Covid-19 Diagnosis System")
-    window.geometry("1000x800")
+    window.geometry("1000x500")
     window.resizable(True, True)
+    
+    # window.grid(row=0, column=0, sticky="nsew")
+    # ctk_window_scrollbar = customtkinter.CTkScrollbar(window, command=window.yview)
+    # ctk_window_scrollbar.grid(column=1, sticky="ns")
+    # window.configure(yscrollcommand=ctk_window_scrollbar.set)
 
-    namelabel = Label(window, text="Full Name: ")
-    agelabel = Label(window, text="Age: ")
-    templabel = Label(window, text="Temperature (Celsius): ")
-    genderlabel = Label(window, text="Gender: ")
-    syslabel = Label(window, text="Systolic Reading: ")
-    dialabel = Label(window, text="Diastolic Reading: ")
-    symlabel = Label(
+    namelabel = customtkinter.CTkLabel(window, text="Full Name: ")
+    agelabel = customtkinter.CTkLabel(window, text="Age: ")
+    templabel = customtkinter.CTkLabel(window, text="Temperature (Celsius): ")
+    genderlabel = customtkinter.CTkLabel(window, text="Gender: ")
+    syslabel = customtkinter.CTkLabel(window, text="Systolic Reading: ")
+    dialabel = customtkinter.CTkLabel(window, text="Diastolic Reading: ")
+    symlabel = customtkinter.CTkLabel(
         window, text="Have you experienced any of the following symptoms? ")
-    diasym1 = Label(window, text="Dizziness")
-    diasym2 = Label(window, text="Fainting")
-    diasym3 = Label(window, text="Blurred Vision")
-    covidlabel = Label(
+    diasym1 = customtkinter.CTkLabel(window, text="Dizziness")
+    diasym2 = customtkinter.CTkLabel(window, text="Fainting")
+    diasym3 = customtkinter.CTkLabel(window, text="Blurred Vision")
+    covidlabel = customtkinter.CTkLabel(
         window, text="Have you experienced any of the following symptoms lately?")
-    covid_symptom1 = Label(window, text="Fever")
-    covid_symptom2 = Label(window, text="Cough")
-    covid_symptom3 = Label(window, text="Fatigue")
-    covid_symptom4 = Label(window, text="Loss of Taste")
-    covid_symptom5 = Label(window, text="Headache")
-    covid_symptom6 = Label(window, text="Runny Nose")
-    covid_symptom7 = Label(window, text="Sore Throat")
-    covid_symptom8 = Label(window, text="Muscle Pain")
-    covid_symptom9 = Label(window, text="Difficulty Breathing")
-    covid_symptom10 = Label(window, text="Sneezing")
-    covid_symptom11 = Label(window, text="Chest Pain")
-    covid_symptom12 = Label(window, text="Burst of Confusion")
-    covid_symptom13 = Label(window, text="Loss of Speech or Mobility")
-    underlyinglabel = Label(
+    covid_symptom1 = customtkinter.CTkLabel(window, text="Fever")
+    covid_symptom2 = customtkinter.CTkLabel(window, text="Cough")
+    covid_symptom3 = customtkinter.CTkLabel(window, text="Fatigue")
+    covid_symptom4 = customtkinter.CTkLabel(window, text="Loss of Taste")
+    covid_symptom5 = customtkinter.CTkLabel(window, text="Headache")
+    covid_symptom6 = customtkinter.CTkLabel(window, text="Runny Nose")
+    covid_symptom7 = customtkinter.CTkLabel(window, text="Sore Throat")
+    covid_symptom8 = customtkinter.CTkLabel(window, text="Muscle Pain")
+    covid_symptom9 = customtkinter.CTkLabel(window, text="Difficulty Breathing")
+    covid_symptom10 = customtkinter.CTkLabel(window, text="Sneezing")
+    covid_symptom11 = customtkinter.CTkLabel(window, text="Chest Pain")
+    covid_symptom12 = customtkinter.CTkLabel(window, text="Burst of Confusion")
+    covid_symptom13 = customtkinter.CTkLabel(window, text="Loss of Speech or Mobility")
+    underlyinglabel = customtkinter.CTkLabel(
         window, text="Do you or your family have a history of any of the following conditions?")
-    underlyingsymp1 = Label(window, text="Cancer")
-    underlyingsymp2 = Label(window, text="Stroke")
+    underlyingsymp1 = customtkinter.CTkLabel(window, text="Cancer")
+    underlyingsymp2 = customtkinter.CTkLabel(window, text="Stroke")
 
-    underlyingsymp4 = Label(window, text="Sickle Cell")
+    underlyingsymp4 = customtkinter.CTkLabel(window, text="Sickle Cell")
 
-    underlyingsymp6 = Label(window, text="Heart Conditions")
-    underlyingsymp7 = Label(window, text="Diabetes")
-    underlyingsymp8 = Label(window, text="Alzheimers")
+    underlyingsymp6 = customtkinter.CTkLabel(window, text="Heart Conditions")
+    underlyingsymp7 = customtkinter.CTkLabel(window, text="Diabetes")
+    underlyingsymp8 = customtkinter.CTkLabel(window, text="Alzheimers")
 
-    underlyingsymp10 = Label(window, text="Cystic Fibrosis")
-    underlyingsymp11 = Label(window, text="Lung Disease")
-    underlyingsymp12 = Label(window, text="Liver Disease")
-    underlyingsymp13 = Label(window, text="Kidney Disease")
+    underlyingsymp10 = customtkinter.CTkLabel(window, text="Cystic Fibrosis")
+    underlyingsymp11 = customtkinter.CTkLabel(window, text="Lung Disease")
+    underlyingsymp12 = customtkinter.CTkLabel(window, text="Liver Disease")
+    underlyingsymp13 = customtkinter.CTkLabel(window, text="Kidney Disease")
 
-    nameentry = Entry(window)
-    ageentry = Entry(window)
-    tempentry = Entry(window)
-    sysentry = Entry(window)
-    diaentry = Entry(window)
+    nameentry = customtkinter.CTkEntry(window)
+    ageentry = customtkinter.CTkEntry(window)
+    tempentry = customtkinter.CTkEntry(window)
+    sysentry = customtkinter.CTkEntry(window)
+    diaentry = customtkinter.CTkEntry(window)
 
     w = Canvas(window, width=2, height=220)
     w.create_rectangle(0, 0, 220, 220, fill="black")
@@ -83,27 +91,27 @@ def Diagnosis():
     b_o_c = StringVar(window)
     losm = StringVar(window)
 
-    fgender = Radiobutton(
+    fgender = customtkinter.CTkRadioButton(
         window,
         text='Female',
         variable=gender,
         value="female"
     )
-    mgender = Radiobutton(
+    mgender = customtkinter.CTkRadioButton(
         window,
         text='Male',
         variable=gender,
         value="male"
     )
 
-    diz_option1 = Checkbutton(
+    diz_option1 = customtkinter.CTkCheckBox(
         window,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=dizzy
     )
-    diz_option2 = Checkbutton(
+    diz_option2 = customtkinter.CTkCheckBox(
         window,
         text='No',
         onvalue='No',
@@ -111,14 +119,14 @@ def Diagnosis():
         variable=dizzy
     )
 
-    faint_option1 = Checkbutton(
+    faint_option1 = customtkinter.CTkCheckBox(
         window,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=faint
     )
-    faint_option2 = Checkbutton(
+    faint_option2 = customtkinter.CTkCheckBox(
         window,
         text='No',
         onvalue='No',
@@ -126,14 +134,14 @@ def Diagnosis():
         variable=faint
     )
 
-    vision_option1 = Checkbutton(
+    vision_option1 = customtkinter.CTkCheckBox(
         window,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=blur
     )
-    vision_option2 = Checkbutton(
+    vision_option2 = customtkinter.CTkCheckBox(
         window,
         text='No',
         onvalue='No',
@@ -141,14 +149,14 @@ def Diagnosis():
         variable=blur
     )
 
-    symp1_option1 = Checkbutton(
+    symp1_option1 = customtkinter.CTkCheckBox(
         window,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=fever
     )
-    symp1_option2 = Checkbutton(
+    symp1_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -156,7 +164,7 @@ def Diagnosis():
         variable=fever
     )
 
-    symp2_option1 = Checkbutton(
+    symp2_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
@@ -164,7 +172,7 @@ def Diagnosis():
         variable=cough
 
     )
-    symp2_option2 = Checkbutton(
+    symp2_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -172,14 +180,14 @@ def Diagnosis():
         variable=cough
     )
 
-    symp3_option1 = Checkbutton(
+    symp3_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=fatigue
     )
-    symp3_option2 = Checkbutton(
+    symp3_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -187,14 +195,14 @@ def Diagnosis():
         variable=fatigue
     )
 
-    symp4_option1 = Checkbutton(
+    symp4_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=l_o_t
     )
-    symp4_option2 = Checkbutton(
+    symp4_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -202,14 +210,14 @@ def Diagnosis():
         variable=l_o_t
     )
 
-    symp5_option1 = Checkbutton(
+    symp5_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=head
     )
-    symp5_option2 = Checkbutton(
+    symp5_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -217,14 +225,14 @@ def Diagnosis():
         variable=head
     )
 
-    symp6_option1 = Checkbutton(
+    symp6_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=run_nose
     )
-    symp6_option2 = Checkbutton(
+    symp6_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -232,14 +240,14 @@ def Diagnosis():
         variable=run_nose
     )
 
-    symp7_option1 = Checkbutton(
+    symp7_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=sore,
     )
-    symp7_option2 = Checkbutton(
+    symp7_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -247,14 +255,14 @@ def Diagnosis():
         variable=sore
     )
 
-    symp8_option1 = Checkbutton(
+    symp8_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=muscle
     )
-    symp8_option2 = Checkbutton(
+    symp8_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -262,14 +270,14 @@ def Diagnosis():
         variable=muscle
     )
 
-    symp9_option1 = Checkbutton(
+    symp9_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=diff_breath
     )
-    symp9_option2 = Checkbutton(
+    symp9_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -277,14 +285,14 @@ def Diagnosis():
         variable=diff_breath
     )
 
-    symp10_option1 = Checkbutton(
+    symp10_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=sneeze
     )
-    symp10_option2 = Checkbutton(
+    symp10_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -292,14 +300,14 @@ def Diagnosis():
         variable=sneeze
     )
 
-    symp11_option1 = Checkbutton(
+    symp11_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=chest
     )
-    symp11_option2 = Checkbutton(
+    symp11_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -307,14 +315,14 @@ def Diagnosis():
         variable=chest
     )
 
-    symp12_option1 = Checkbutton(
+    symp12_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=b_o_c
     )
-    symp12_option2 = Checkbutton(
+    symp12_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -322,14 +330,14 @@ def Diagnosis():
         variable=b_o_c
     )
 
-    symp13_option1 = Checkbutton(
+    symp13_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=losm
     )
-    symp13_option2 = Checkbutton(
+    symp13_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue='No',
@@ -351,14 +359,14 @@ def Diagnosis():
     liver = StringVar(window)
     kid = StringVar(window)
 
-    underlyingsymp1_option1 = Checkbutton(
+    underlyingsymp1_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=cancer
     )
-    underlyingsymp1_option2 = Checkbutton(
+    underlyingsymp1_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -366,14 +374,14 @@ def Diagnosis():
         variable=cancer
     )
 
-    underlyingsymp2_option1 = Checkbutton(
+    underlyingsymp2_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=stroke
     )
-    underlyingsymp2_option2 = Checkbutton(
+    underlyingsymp2_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -381,14 +389,14 @@ def Diagnosis():
         variable=stroke
     )
 
-    underlyingsymp4_option1 = Checkbutton(
+    underlyingsymp4_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=sick
     )
-    underlyingsymp4_option2 = Checkbutton(
+    underlyingsymp4_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -396,14 +404,14 @@ def Diagnosis():
         variable=sick
     )
 
-    underlyingsymp6_option1 = Checkbutton(
+    underlyingsymp6_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=heart
     )
-    underlyingsymp6_option2 = Checkbutton(
+    underlyingsymp6_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -411,14 +419,14 @@ def Diagnosis():
         variable=heart
     )
 
-    underlyingsymp7_option1 = Checkbutton(
+    underlyingsymp7_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=dia
     )
-    underlyingsymp7_option2 = Checkbutton(
+    underlyingsymp7_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -426,14 +434,14 @@ def Diagnosis():
         variable=dia
     )
 
-    underlyingsymp8_option1 = Checkbutton(
+    underlyingsymp8_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=alz
     )
-    underlyingsymp8_option2 = Checkbutton(
+    underlyingsymp8_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -441,14 +449,14 @@ def Diagnosis():
         variable=alz
     )
 
-    underlyingsymp10_option1 = Checkbutton(
+    underlyingsymp10_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=cys
     )
-    underlyingsymp10_option2 = Checkbutton(
+    underlyingsymp10_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -456,14 +464,14 @@ def Diagnosis():
         variable=cys
     )
 
-    underlyingsymp11_option1 = Checkbutton(
+    underlyingsymp11_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=lung
     )
-    underlyingsymp11_option2 = Checkbutton(
+    underlyingsymp11_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -471,14 +479,14 @@ def Diagnosis():
         variable=lung
     )
 
-    underlyingsymp12_option1 = Checkbutton(
+    underlyingsymp12_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=liver
     )
-    underlyingsymp12_option2 = Checkbutton(
+    underlyingsymp12_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",
@@ -486,14 +494,14 @@ def Diagnosis():
         variable=liver
     )
 
-    underlyingsymp13_option1 = Checkbutton(
+    underlyingsymp13_option1 = customtkinter.CTkCheckBox(
         window,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=kid
     )
-    underlyingsymp13_option2 = Checkbutton(
+    underlyingsymp13_option2 = customtkinter.CTkCheckBox(
         window,
         text="No",
         onvalue="No",

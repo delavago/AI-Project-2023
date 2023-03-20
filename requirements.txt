@@ -1,3 +1,4 @@
 prolog==0.3.1
 tk==0.1.0
 pyswip==0.2.9
+customtkinter==5.1.2
