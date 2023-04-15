@@ -2,24 +2,19 @@
 :- use_module(library(pce)).
 :- require([ append/3
 	   ]).
-:-dynamic mildsymptoms/1.
-:-dynamic severesymptoms/1.
-:-dynamic krakensymptoms/1.
+:-dynamic regularsymptoms/1.
+:-dynamic deltasymptoms/1.
 :-dynamic omicronsymptoms/1.
-:-dynamic underlyingconditions/1.
+:-dynamic underlying/1.
 :-dynamic stats/6.
 stats(0,0,0,0,0,0).
 
 illness(covid).
 
-illness_type(covid,[mild,severe,kraken,omicron]).
+illness_type(covid,[regular,delta,omicron]).
 
-mildsymptoms([fever,cough,fatigue,'loss of taste or smell',headache,'congestion or runny nose']).
-
-severesymptoms([fever,cough,fatigue,'loss of taste or smell',"difficulty breathing","mild pneumonia","Muscle aches"]).
-
-krakensymptoms([fever,cough,fatigue,'loss of taste or smell',headache,'congestion or runny nose', sneezing,'sore throat',diarrhea]).
-
+regularsymptoms([fever,cough,fatigue,'loss of taste or smell',headache,'congestion or runny nose']).
+deltasymptoms([fever,cough,fatigue,'loss of taste or smell',headache,'congestion or runny nose', sneezing,'sore throat',diarrhea]).
 omicronsymptoms([fever,cough,fatigue,'loss of taste or smell',headache,'congestion or runny nose', sneezing,'sore throat',diarrhea,'muscle pain','difficulty breathing','loss of speech or mobility','chest pain','burst of confusion']).
 
 underlying([stroke,tuberulosis,'sickle cell','HIV','heart conditions',diabetes,alzheimers,dementia,'cystic fibrosis','lung disease','liver disease','kidney disease']).
@@ -32,6 +27,7 @@ menu:-new(M,dialog('COVID-19 Diagnosis System')),
     new(H2, dialog_group('')),
     send(M,append,H1),
     send(M,append,H2,below),
+
     send(H2,append,button(new_Symptom, message(@prolog,new_symptom))),
 
     %pushes next button into a new line.
@@ -59,7 +55,7 @@ new_symptom:-
 
     send(NS,open).
 
-new_mild_symptom:-new(V,dialog('New mild Variant Symptom')),send(V,append,new(label)),
+new_regular_symptom:-new(V,dialog('New Regular Variant Symptom')),send(V,append,new(label)),
     new(V1,dialog_group('')),
     new(V2,dialog_group('')),
 
@@ -67,11 +63,11 @@ new_mild_symptom:-new(V,dialog('New mild Variant Symptom')),send(V,append,new(la
     send(V,append,V2,below),
 
     send(V1,append,new(Vl,label)),send(Vl,append,'Enter new Symptom information'),
-    send(V2,append,new(MSymptoms,text_item(symptoms))),
-    send(V2,append,button(submit,message(@prolog,save_msymptom,MSymptoms?selection))),
+    send(V2,append,new(RSymptoms,text_item(symptoms))),
+    send(V2,append,button(submit,message(@prolog,save_rsymptom,RSymptoms?selection))),
     send(V,open).
 
-new_severe_symptom:-new(V,dialog('New severe Variant Symptom')),send(V,append,new(label)),
+new_delta_symptom:-new(V,dialog('New Delta Variant Symptom')),send(V,append,new(label)),
     new(V1,dialog_group('')),
     new(V2,dialog_group('')),
 
@@ -79,21 +75,8 @@ new_severe_symptom:-new(V,dialog('New severe Variant Symptom')),send(V,append,ne
     send(V,append,V2,below),
 
     send(V1,append,new(Vl,label)),send(Vl,append,'Enter new Symptom information'),
-    send(V2,append,new(SSymptoms,text_item(symptoms))),
-    send(V2,append,button(submit,message(@prolog,save_ssymptom,SSymptoms?selection))),
-    send(V,open).
-
-
-new_kraken_symptom:-new(V,dialog('New Kraken Variant Symptom')),send(V,append,new(label)),
-    new(V1,dialog_group('')),
-    new(V2,dialog_group('')),
-
-    send(V,append,V1),
-    send(V,append,V2,below),
-
-    send(V1,append,new(Vl,label)),send(Vl,append,'Enter new Symptom information'),
-    send(V2,append,new(KSymptoms,text_item(symptoms))),
-    send(V2,append,button(submit,message(@prolog,save_ksymptom,KSymptoms?selection))),
+    send(V2,append,new(DSymptoms,text_item(symptoms))),
+    send(V2,append,button(submit,message(@prolog,save_dsymptom,DSymptoms?selection))),
     send(V,open).
 
 new_omicron_symptom:-new(V,dialog('New Omicron Variant Symptom')),send(V,append,new(label)),
@@ -110,16 +93,10 @@ new_omicron_symptom:-new(V,dialog('New Omicron Variant Symptom')),send(V,append,
 
 
 %update variant list
-save_msymptom(MSymptoms):-
-    regularsymptoms(Old),append(Old,[MSymptoms],New),
-    retractall(mildsymptoms(_)),assertz(mildsymptoms(New)),mildsymptoms(M),
-    nl,write('Symptom:'),write(M),write(' was added to the database').
-
-save_ssymptom(SSymptoms):-
-    regularsymptoms(Old),append(Old,[SSymptoms],New),
-    retractall(severesymptoms(_)),assertz(severesymptoms(New)),mildsymptoms(S),
+save_rsymptom(RSymptoms):-
+    regularsymptoms(Old),append(Old,[RSymptoms],New),
+    retractall(regularsymptoms(_)),assertz(regularsymptoms(New)),regularsymptoms(S),
     nl,write('Symptom:'),write(S),write(' was added to the database').
-
 
 save_dsymptom(DSymptoms):-
     deltasymptoms(Old),append(Old,[DSymptoms],New),
@@ -322,19 +299,16 @@ save_patient(Name,Age,Gender,Temperature,Dizzy,Faint,Blur,SysR,DiaR,Fever,Fatigu
 
     Riskfactor is Dissval+Faintval+Blurval+Feverval+Fatigueval+Headval+Soreval+Diffbval+Chestval+Losmval+Coughval+Lotval+Runval+Muscleval+Sneezeval+  Bocval,
 
-    %determines whether a person has the mild,severe, kraken or omicron variant
+    %determines whether a person has the regular, delta or omicron variant
     send(S,append,new(Lbl24,label)),
-    (Riskfactor=<28 ->Krakencount is 0, Omicroncount is 0,Mildcount is 1, Severecount is 0,Underlyingcount is 0, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the mild Covid-19 variant, Patient should quarantine for 14 days');
+    (Riskfactor=<28 ->Deltacount is 0, Omicroncount is 0,Mildcount is 1, Severecount is 0,Underlyingcount is 0, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Regular Covid-19 variant, Patient should quarantine for 14 days');
 
-       Riskfactor>28,Riskfactor=<58 ->Krakencount is 0, Omicroncount is 0,Mildcount is 0, Severecount is 1,Underlyingcount is 0, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Severe Covid-19 variant, Patient should visit the doctor immediately');
+   Riskfactor>28,Riskfactor=<58 ->Deltacount is 1, Omicroncount is 0,Mildcount is 0, Severecount is 1,Underlyingcount is 0, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Delta Covid-19 variant, Patient should visit the doctor immediately');
 
-
-   Riskfactor>28,Riskfactor=<58 ->Krakencount is 1, Omicroncount is 0,Mildcount is 0, Severecount is 1,Underlyingcount is 0, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Kraken Covid-19 variant, Patient should visit the doctor immediately');
-
-    Riskfactor>58,Underlyingfactor >=1 ->Krakencount is 0, Omicroncount is 1, Mildcount is 0, Severecount is 1, Underlyingcount is 1, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Ominicron Covid-19 variant, Patient should visit the doctor immediately')),
+    Riskfactor>58,Underlyingfactor >=1 ->Deltacount is 0, Omicroncount is 1, Mildcount is 0, Severecount is 1, Underlyingcount is 1, send(Lbl24,append,'Covid-19 Diagnosis: Patient may have the Ominicron Covid-19 variant, Patient should visit the doctor immediately')),
 
 
-    updatestats(Krakencount,Omicroncount,Mildcount,Severecount,Underlyingcount),
+    updatestats(Deltacount,Omicroncount,Mildcount,Severecount,Underlyingcount),
 
 
     send(S,open).
@@ -408,10 +382,10 @@ save_patient_python(Name,Age,Gender,Temperature,Dizzy,Faint,Blur,SysR,DiaR,Fever
     updatestats(Deltacount,Omicroncount,Mildcount,Severecount,Underlyingcount).
 
 %
-updatestats(Krakencount,Omicroncount,Mildcount,Severecount,Underlyingcount):-
-    stats(Kcount,Ocount,Mcount,Scount,Ucount,Totalcount),
+updatestats(Deltacount,Omicroncount,Mildcount,Severecount,Underlyingcount):-
+    stats(Dcount,Ocount,Mcount,Scount,Ucount,Totalcount),
 
-    NewKcount is Kcount+Krakencount,
+    NewDcount is Dcount+Deltacount,
     NewOcount is Ocount+Omicroncount,
     NewMcount is Mcount+Mildcount,
     NewScount is Scount+Severecount,
@@ -420,13 +394,13 @@ updatestats(Krakencount,Omicroncount,Mildcount,Severecount,Underlyingcount):-
 
     retractall(stats(_,_,_,_,_,_)),
 
-    assert(stats(NewKcount,NewOcount,NewMcount,NewScount,NewUcount,NewTcount)).
+    assert(stats(NewDcount,NewOcount,NewMcount,NewScount,NewUcount,NewTcount)).
 
 % displays percentage of persons with mild and severe symptoms, delta
 % and omicron variant, and persons with omicron who have underlying
 % conditions.
 stats_display:-
-    stats(Krakencount,Omicroncount,Mildcount,Severecount,Underlyingcount,Totalcount),
+    stats(Deltacount,Omicroncount,Mildcount,Severecount,Underlyingcount,Totalcount),
     new(CS,dialog('Covid-19 Statistics')),send(CS,append,new(label)),
     nl,write('Total Count:'),write(Totalcount),
 
@@ -438,8 +412,8 @@ stats_display:-
     send(CS,append,new(Lbl27,label)),send(Lbl27,append,'Percentages of Persons with Severe Symptoms:'),
     send(CS,append,new(Lbl28,label)),send(Lbl28,append,Severestat),send(Lbl28,append,Mildstat), send(Lbl26,append,'%'),
 
-    Deltastat is(Krakencount/Totalcount)*100,
-    send(CS,append,new(Lbl29,label)),send(Lbl29,append,'Percentages of Persons with Kraken Variant:'),
+    Deltastat is(Deltacount/Totalcount)*100,
+    send(CS,append,new(Lbl29,label)),send(Lbl29,append,'Percentages of Persons with Delta Variant:'),
     send(CS,append,new(Lbl30,label)),send(Lbl30,append,Deltastat),send(Lbl30,append,Mildstat), send(Lbl26,append,'%'),
 
     Omicronstat is(Omicroncount/Totalcount)*100,
@@ -454,7 +428,7 @@ stats_display:-
     send(CS,open).
 
 stats_display_python:-
-    stats(Krakencount,Omicroncount,Mildcount,Severecount,Underlyingcount,Totalcount),
+    stats(Deltacount,Omicroncount,Mildcount,Severecount,Underlyingcount,Totalcount),
     nl,write('Total Count:'),write(Totalcount),
 
     Mildstat is(Mildcount/Totalcount)*100,
@@ -463,8 +437,8 @@ stats_display_python:-
     Severestat is(Severecount/Totalcount)*100,
     nl,write('Percentages of Persons with Severe Symptoms: '),write(Severestat),write('%'),
 
-    Deltastat is(Krakencount/Totalcount)*100,
-    nl,write('Percentages of Persons with Kraken Variant: '),write(Deltastat),write('%'),
+    Deltastat is(Deltacount/Totalcount)*100,
+    nl,write('Percentages of Persons with Delta Variant: '),write(Deltastat),write('%'),
 
     Omicronstat is(Omicroncount/Totalcount)*100,
     nl,write('Percentages of Persons with Omicron Variant:'),write(Omicronstat),write('%'),

@@ -1,500 +1,509 @@
-from tkinter import *
+from tkinter import messagebox, Canvas, StringVar
+import customtkinter
 from pyswip import Prolog
 
 
 # Patient Diagnositics Form
 
+# customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
+# customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 def Diagnosis():
-    window = Tk()
+    window = customtkinter.CTk()
     window.title("Covid-19 Diagnosis System")
-    window.geometry("1000x800")
+    window.geometry("1000x500")
     window.resizable(True, True)
+    
+    
+    scrollable_frame = customtkinter.CTkScrollableFrame(window, width=1000, height=500)
+    scrollable_frame.grid(row=0, column=0, sticky="nsew")
+    window.grid_rowconfigure(0, weight=1)
+    window.grid_columnconfigure(0, weight=1)
 
-    namelabel = Label(window, text="Full Name: ")
-    agelabel = Label(window, text="Age: ")
-    templabel = Label(window, text="Temperature (Celsius): ")
-    genderlabel = Label(window, text="Gender: ")
-    syslabel = Label(window, text="Systolic Reading: ")
-    dialabel = Label(window, text="Diastolic Reading: ")
-    symlabel = Label(
-        window, text="Have you experienced any of the following symptoms? ")
-    diasym1 = Label(window, text="Dizziness")
-    diasym2 = Label(window, text="Fainting")
-    diasym3 = Label(window, text="Blurred Vision")
-    covidlabel = Label(
-        window, text="Have you experienced any of the following symptoms lately?")
-    covid_symptom1 = Label(window, text="Fever")
-    covid_symptom2 = Label(window, text="Cough")
-    covid_symptom3 = Label(window, text="Fatigue")
-    covid_symptom4 = Label(window, text="Loss of Taste")
-    covid_symptom5 = Label(window, text="Headache")
-    covid_symptom6 = Label(window, text="Runny Nose")
-    covid_symptom7 = Label(window, text="Sore Throat")
-    covid_symptom8 = Label(window, text="Muscle Pain")
-    covid_symptom9 = Label(window, text="Difficulty Breathing")
-    covid_symptom10 = Label(window, text="Sneezing")
-    covid_symptom11 = Label(window, text="Chest Pain")
-    covid_symptom12 = Label(window, text="Burst of Confusion")
-    covid_symptom13 = Label(window, text="Loss of Speech or Mobility")
-    underlyinglabel = Label(
-        window, text="Do you or your family have a history of any of the following conditions?")
-    underlyingsymp1 = Label(window, text="Cancer")
-    underlyingsymp2 = Label(window, text="Stroke")
+    namelabel = customtkinter.CTkLabel(scrollable_frame, text="Full Name: ")
+    agelabel = customtkinter.CTkLabel(scrollable_frame, text="Age: ")
+    templabel = customtkinter.CTkLabel(scrollable_frame, text="Temperature (Celsius): ")
+    genderlabel = customtkinter.CTkLabel(scrollable_frame, text="Gender: ")
+    syslabel = customtkinter.CTkLabel(scrollable_frame, text="Systolic Reading: ")
+    dialabel = customtkinter.CTkLabel(scrollable_frame, text="Diastolic Reading: ")
+    symlabel = customtkinter.CTkLabel(
+        scrollable_frame, text="Have you experienced any of the following symptoms? ")
+    diasym1 = customtkinter.CTkLabel(scrollable_frame, text="Dizziness")
+    diasym2 = customtkinter.CTkLabel(scrollable_frame, text="Fainting")
+    diasym3 = customtkinter.CTkLabel(scrollable_frame, text="Blurred Vision")
+    covidlabel = customtkinter.CTkLabel(
+        scrollable_frame, text="Have you experienced any of the following symptoms lately?")
+    covid_symptom1 = customtkinter.CTkLabel(scrollable_frame, text="Fever")
+    covid_symptom2 = customtkinter.CTkLabel(scrollable_frame, text="Cough")
+    covid_symptom3 = customtkinter.CTkLabel(scrollable_frame, text="Fatigue")
+    covid_symptom4 = customtkinter.CTkLabel(scrollable_frame, text="Loss of Taste")
+    covid_symptom5 = customtkinter.CTkLabel(scrollable_frame, text="Headache")
+    covid_symptom6 = customtkinter.CTkLabel(scrollable_frame, text="Runny Nose")
+    covid_symptom7 = customtkinter.CTkLabel(scrollable_frame, text="Sore Throat")
+    covid_symptom8 = customtkinter.CTkLabel(scrollable_frame, text="Muscle Pain")
+    covid_symptom9 = customtkinter.CTkLabel(scrollable_frame, text="Difficulty Breathing")
+    covid_symptom10 = customtkinter.CTkLabel(scrollable_frame, text="Sneezing")
+    covid_symptom11 = customtkinter.CTkLabel(scrollable_frame, text="Chest Pain")
+    covid_symptom12 = customtkinter.CTkLabel(scrollable_frame, text="Burst of Confusion")
+    covid_symptom13 = customtkinter.CTkLabel(scrollable_frame, text="Loss of Speech or Mobility")
+    underlyinglabel = customtkinter.CTkLabel(
+        scrollable_frame, text="Do you or your family have a history of any of the following conditions?")
+    underlyingsymp1 = customtkinter.CTkLabel(scrollable_frame, text="Cancer")
+    underlyingsymp2 = customtkinter.CTkLabel(scrollable_frame, text="Stroke")
 
-    underlyingsymp4 = Label(window, text="Sickle Cell")
+    underlyingsymp4 = customtkinter.CTkLabel(scrollable_frame, text="Sickle Cell")
 
-    underlyingsymp6 = Label(window, text="Heart Conditions")
-    underlyingsymp7 = Label(window, text="Diabetes")
-    underlyingsymp8 = Label(window, text="Alzheimers")
+    underlyingsymp6 = customtkinter.CTkLabel(scrollable_frame, text="Heart Conditions")
+    underlyingsymp7 = customtkinter.CTkLabel(scrollable_frame, text="Diabetes")
+    underlyingsymp8 = customtkinter.CTkLabel(scrollable_frame, text="Alzheimers")
 
-    underlyingsymp10 = Label(window, text="Cystic Fibrosis")
-    underlyingsymp11 = Label(window, text="Lung Disease")
-    underlyingsymp12 = Label(window, text="Liver Disease")
-    underlyingsymp13 = Label(window, text="Kidney Disease")
+    underlyingsymp10 = customtkinter.CTkLabel(scrollable_frame, text="Cystic Fibrosis")
+    underlyingsymp11 = customtkinter.CTkLabel(scrollable_frame, text="Lung Disease")
+    underlyingsymp12 = customtkinter.CTkLabel(scrollable_frame, text="Liver Disease")
+    underlyingsymp13 = customtkinter.CTkLabel(scrollable_frame, text="Kidney Disease")
 
-    nameentry = Entry(window)
-    ageentry = Entry(window)
-    tempentry = Entry(window)
-    sysentry = Entry(window)
-    diaentry = Entry(window)
+    nameentry = customtkinter.CTkEntry(scrollable_frame)
+    ageentry = customtkinter.CTkEntry(scrollable_frame)
+    tempentry = customtkinter.CTkEntry(scrollable_frame)
+    sysentry = customtkinter.CTkEntry(scrollable_frame)
+    diaentry = customtkinter.CTkEntry(scrollable_frame)
 
-    w = Canvas(window, width=2, height=220)
+    w = Canvas(scrollable_frame, width=2, height=220)
     w.create_rectangle(0, 0, 220, 220, fill="black")
 
-    s = Canvas(window, width=2, height=220)
+    s = Canvas(scrollable_frame, width=2, height=220)
     s.create_rectangle(0, 0, 220, 220, fill="black")
 
-    gender = StringVar(window)
-    dizzy = StringVar(window)
-    faint = StringVar(window)
-    blur = StringVar(window)
-    fever = StringVar(window)
-    cough = StringVar(window)
-    fatigue = StringVar(window)
-    l_o_t = StringVar(window)
-    head = StringVar(window)
-    run_nose = StringVar(window)
-    sore = StringVar(window)
-    muscle = StringVar(window)
-    diff_breath = StringVar(window)
-    sneeze = StringVar(window)
-    chest = StringVar(window)
-    b_o_c = StringVar(window)
-    losm = StringVar(window)
+    gender = StringVar(scrollable_frame)
+    dizzy = StringVar(scrollable_frame)
+    faint = StringVar(scrollable_frame)
+    blur = StringVar(scrollable_frame)
+    fever = StringVar(scrollable_frame)
+    cough = StringVar(scrollable_frame)
+    fatigue = StringVar(scrollable_frame)
+    l_o_t = StringVar(scrollable_frame)
+    head = StringVar(scrollable_frame)
+    run_nose = StringVar(scrollable_frame)
+    sore = StringVar(scrollable_frame)
+    muscle = StringVar(scrollable_frame)
+    diff_breath = StringVar(scrollable_frame)
+    sneeze = StringVar(scrollable_frame)
+    chest = StringVar(scrollable_frame)
+    b_o_c = StringVar(scrollable_frame)
+    losm = StringVar(scrollable_frame)
 
-    fgender = Radiobutton(
-        window,
+    fgender = customtkinter.CTkRadioButton(
+        scrollable_frame,
         text='Female',
         variable=gender,
         value="female"
     )
-    mgender = Radiobutton(
-        window,
+    mgender = customtkinter.CTkRadioButton(
+        scrollable_frame,
         text='Male',
         variable=gender,
         value="male"
     )
 
-    diz_option1 = Checkbutton(
-        window,
+    diz_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=dizzy
     )
-    diz_option2 = Checkbutton(
-        window,
+    diz_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='No',
         onvalue='No',
         offvalue='Yes',
         variable=dizzy
     )
 
-    faint_option1 = Checkbutton(
-        window,
+    faint_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=faint
     )
-    faint_option2 = Checkbutton(
-        window,
+    faint_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='No',
         onvalue='No',
         offvalue='Yes',
         variable=faint
     )
 
-    vision_option1 = Checkbutton(
-        window,
+    vision_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=blur
     )
-    vision_option2 = Checkbutton(
-        window,
+    vision_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='No',
         onvalue='No',
         offvalue='Yes',
         variable=blur
     )
 
-    symp1_option1 = Checkbutton(
-        window,
+    symp1_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text='Yes',
         onvalue='Yes',
         offvalue='No',
         variable=fever
     )
-    symp1_option2 = Checkbutton(
-        window,
+    symp1_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=fever
     )
 
-    symp2_option1 = Checkbutton(
-        window,
+    symp2_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=cough
 
     )
-    symp2_option2 = Checkbutton(
-        window,
+    symp2_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=cough
     )
 
-    symp3_option1 = Checkbutton(
-        window,
+    symp3_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=fatigue
     )
-    symp3_option2 = Checkbutton(
-        window,
+    symp3_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=fatigue
     )
 
-    symp4_option1 = Checkbutton(
-        window,
+    symp4_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=l_o_t
     )
-    symp4_option2 = Checkbutton(
-        window,
+    symp4_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=l_o_t
     )
 
-    symp5_option1 = Checkbutton(
-        window,
+    symp5_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=head
     )
-    symp5_option2 = Checkbutton(
-        window,
+    symp5_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=head
     )
 
-    symp6_option1 = Checkbutton(
-        window,
+    symp6_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=run_nose
     )
-    symp6_option2 = Checkbutton(
-        window,
+    symp6_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=run_nose
     )
 
-    symp7_option1 = Checkbutton(
-        window,
+    symp7_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=sore,
     )
-    symp7_option2 = Checkbutton(
-        window,
+    symp7_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=sore
     )
 
-    symp8_option1 = Checkbutton(
-        window,
+    symp8_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=muscle
     )
-    symp8_option2 = Checkbutton(
-        window,
+    symp8_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=muscle
     )
 
-    symp9_option1 = Checkbutton(
-        window,
+    symp9_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=diff_breath
     )
-    symp9_option2 = Checkbutton(
-        window,
+    symp9_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=diff_breath
     )
 
-    symp10_option1 = Checkbutton(
-        window,
+    symp10_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=sneeze
     )
-    symp10_option2 = Checkbutton(
-        window,
+    symp10_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=sneeze
     )
 
-    symp11_option1 = Checkbutton(
-        window,
+    symp11_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=chest
     )
-    symp11_option2 = Checkbutton(
-        window,
+    symp11_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=chest
     )
 
-    symp12_option1 = Checkbutton(
-        window,
+    symp12_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=b_o_c
     )
-    symp12_option2 = Checkbutton(
-        window,
+    symp12_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=b_o_c
     )
 
-    symp13_option1 = Checkbutton(
-        window,
+    symp13_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=losm
     )
-    symp13_option2 = Checkbutton(
-        window,
+    symp13_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue='No',
         offvalue='Yes',
         variable=losm
     )
 
-    cancer = StringVar(window)
-    stroke = StringVar(window)
+    cancer = StringVar(scrollable_frame)
+    stroke = StringVar(scrollable_frame)
 
-    sick = StringVar(window)
+    sick = StringVar(scrollable_frame)
 
-    heart = StringVar(window)
-    dia = StringVar(window)
-    alz = StringVar(window)
+    heart = StringVar(scrollable_frame)
+    dia = StringVar(scrollable_frame)
+    alz = StringVar(scrollable_frame)
 
-    cys = StringVar(window)
-    lung = StringVar(window)
-    liver = StringVar(window)
-    kid = StringVar(window)
+    cys = StringVar(scrollable_frame)
+    lung = StringVar(scrollable_frame)
+    liver = StringVar(scrollable_frame)
+    kid = StringVar(scrollable_frame)
 
-    underlyingsymp1_option1 = Checkbutton(
-        window,
+    underlyingsymp1_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue='Yes',
         offvalue='No',
         variable=cancer
     )
-    underlyingsymp1_option2 = Checkbutton(
-        window,
+    underlyingsymp1_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=cancer
     )
 
-    underlyingsymp2_option1 = Checkbutton(
-        window,
+    underlyingsymp2_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=stroke
     )
-    underlyingsymp2_option2 = Checkbutton(
-        window,
+    underlyingsymp2_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=stroke
     )
 
-    underlyingsymp4_option1 = Checkbutton(
-        window,
+    underlyingsymp4_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=sick
     )
-    underlyingsymp4_option2 = Checkbutton(
-        window,
+    underlyingsymp4_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=sick
     )
 
-    underlyingsymp6_option1 = Checkbutton(
-        window,
+    underlyingsymp6_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=heart
     )
-    underlyingsymp6_option2 = Checkbutton(
-        window,
+    underlyingsymp6_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=heart
     )
 
-    underlyingsymp7_option1 = Checkbutton(
-        window,
+    underlyingsymp7_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=dia
     )
-    underlyingsymp7_option2 = Checkbutton(
-        window,
+    underlyingsymp7_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=dia
     )
 
-    underlyingsymp8_option1 = Checkbutton(
-        window,
+    underlyingsymp8_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=alz
     )
-    underlyingsymp8_option2 = Checkbutton(
-        window,
+    underlyingsymp8_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=alz
     )
 
-    underlyingsymp10_option1 = Checkbutton(
-        window,
+    underlyingsymp10_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=cys
     )
-    underlyingsymp10_option2 = Checkbutton(
-        window,
+    underlyingsymp10_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=cys
     )
 
-    underlyingsymp11_option1 = Checkbutton(
-        window,
+    underlyingsymp11_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=lung
     )
-    underlyingsymp11_option2 = Checkbutton(
-        window,
+    underlyingsymp11_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=lung
     )
 
-    underlyingsymp12_option1 = Checkbutton(
-        window,
+    underlyingsymp12_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=liver
     )
-    underlyingsymp12_option2 = Checkbutton(
-        window,
+    underlyingsymp12_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
         variable=liver
     )
 
-    underlyingsymp13_option1 = Checkbutton(
-        window,
+    underlyingsymp13_option1 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="Yes",
         onvalue="Yes",
         offvalue="No",
         variable=kid
     )
-    underlyingsymp13_option2 = Checkbutton(
-        window,
+    underlyingsymp13_option2 = customtkinter.CTkCheckBox(
+        scrollable_frame,
         text="No",
         onvalue="No",
         offvalue="Yes",
@@ -503,13 +512,17 @@ def Diagnosis():
 
     def GetInfo():
         prolog = Prolog()
-        Status = list(prolog.query("save_patient_python(" + nameentry.get() + "," + ageentry.get() + ","+gender.get() + ","+tempentry.get()+","+dizzy.get()+","+faint.get()+","+blur.get()+","+sysentry.get()+","+diaentry.get()+","+fever.get() + ","+fatigue.get()+","+head.get()+","+sore.get()+","+diff_breath.get()+","+chest.get() +
-                      ","+losm.get()+"," + cough.get()+","+l_o_t.get()+","+run_nose.get()+"," + muscle.get()+","+sneeze.get()+","+b_o_c.get()+","+cancer.get()+","+dia.get()+","+lung.get()+","+kid.get()+","+stroke.get()+","+sick.get()+","+heart.get()+","+alz.get()+","+cys.get()+","+liver.get()+")"))
+        if all(entry.get() for entry in (nameentry, ageentry, tempentry, sysentry, diaentry, dizzy, faint, blur, fever, fatigue, head, sore, diff_breath, chest, losm, cough, l_o_t, run_nose, muscle, sneeze, b_o_c, cancer, stroke, sick, heart, dia, alz, cys, lung, liver, kid)):
+                status = list(prolog.query(f"save_patient_python({nameentry.get()}, {ageentry.get()}, {gender.get()}, {tempentry.get()}, {dizzy.get()}, {faint.get()}, {blur.get()}, {sysentry.get()}, {diaentry.get()}, {fever.get()}, {fatigue.get()}, {head.get()}, {sore.get()}, {diff_breath.get()}, {chest.get()}, {losm.get()}, {cough.get()}, {l_o_t.get()}, {run_nose.get()}, {muscle.get()}, {sneeze.get()}, {b_o_c.get()}, {cancer.get()}, {dia.get()}, {lung.get()}, {kid.get()}, {stroke.get()}, {sick.get()}, {heart.get()}, {alz.get()}, {cys.get()}, {liver.get()})"))
+                messagebox.showinfo("Success", "Patient has been saved")
+                window.destroy()
+        else:
+            messagebox.showerror("Error", "Please fill in all the fields")
+        print(status)
 
-        print(Status)
 
-    submit_button = Button(
-        window,
+    submit_button = customtkinter.CTkButton(
+        scrollable_frame,
         text="Submit",
         command=GetInfo
 
