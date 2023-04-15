@@ -12,7 +12,6 @@ prolog = Prolog()
 
 prolog.consult(
     'data/knowledge_base.pl')
-#c = list(prolog.query("illness(Who)"))
 
 # Home Page of Expert Systems
 customtkinter.set_appearance_mode("light")  # Modes: system (default), light, dark
@@ -24,7 +23,6 @@ app = customtkinter.CTk()  # create CTk window like you do with the Tk window
 app.title("Covid-19 Diagnosis System")
 app.geometry("650x500")
 app.resizable(False, False)
-
 
 title_head = customtkinter.CTkFont(family="Helvetica", size=18, weight="bold")
 head = customtkinter.CTkLabel(app,
@@ -40,9 +38,11 @@ first = customtkinter.CTkButton(app,
                )
 
 def view_stats():
-    Stats = list(prolog.query("stats_display_python"))
-
-    print(Stats)
+    prolog_results = prolog.query("stats_display_python")
+    results_list = []
+    for result in prolog_results:
+        results_list.append(result)
+    print(results_list)
 
 
 second = customtkinter.CTkButton(app,
