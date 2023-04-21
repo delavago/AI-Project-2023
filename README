@@ -5,7 +5,14 @@ Artificial Intelligence Group Project.
 ---------------------------------------------
 
 Overview:
-The proposed expert system was designed to identify if a person was at risk of having COVID-19 or possibly already had it. Information on various contributory factors, including temperature, blood pressure, and symptoms, were gathered and compared with an encoded expert knowledge base. Short and long-term recommendations were provided based on the severity of the detected symptoms. The MOH was able to add knowledge to the system, and stakeholders could query the system to display statistics on the percentage of persons at risk of having COVID-19, including the percentage of persons with mild or severe symptoms, underlying conditions, and the top three underlying conditions. The expert system was based on a Prolog database and accessed via Python. It also provides advice to the MOH on possible actions required and alertes the authorities of any increase in reports of persons prone to having COVID-19.
+The proposed expert system was designed to identify if a person was at risk of having COVID-19 or possibly already had it.
+Information on various contributory factors, including temperature, blood pressure, and symptoms, were gathered and 
+compared with an encoded expert knowledge base. Short and long-term recommendations were provided based on the severity of 
+the detected symptoms. The MOH was able to add knowledge to the system, and stakeholders could query the system to display 
+statistics on the percentage of persons at risk of having COVID-19, including the percentage of persons with mild or severe symptoms,
+underlying conditions, and the top three underlying conditions. The expert system was based on a Prolog database and accessed
+via Python. It also provides advice to the MOH on possible actions required and alertes the authorities of any increase in 
+reports of persons prone to having COVID-19.
 
 
 ### GETTING STARTED
